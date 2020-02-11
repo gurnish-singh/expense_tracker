@@ -1,6 +1,9 @@
+/////////packages//////////////////////
 import 'package:flutter/material.dart';
-
-import 'package:expense_tracker/widgets/userTransaction.dart';
+//////files/////////////////////////
+import 'package:expense_tracker/widgets/newTransaction.dart';
+import 'widgets/transactionList.dart';
+import 'models/transaction.dart';
 
 void main() => runApp(MyApp());
 
@@ -14,7 +17,52 @@ class MyApp extends StatelessWidget {
   }
 }
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
+  @override
+  _MyHomePageState createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  /////////initial list of transactions//////////////////
+  final List<Transaction> transactions = [
+    Transaction(
+      id: 't1',
+      title: 'New shoes',
+      amount: 50,
+      date: DateTime.now(),
+    ),
+    Transaction(
+      id: 't2',
+      title: 'Groceries',
+      amount: 40,
+      date: DateTime.now(),
+    ),
+  ];
+  ////////////function for button of addNewTransaction///////////////////
+  void addNew(String title, double amount) {
+    final newTx = Transaction(
+      title: title,
+      amount: amount,
+      date: DateTime.now(),
+      id: DateTime.now().toString(), //temporary
+    );
+    // now we need to add it to the parent transaction list;
+    setState(() {
+      transactions.add(newTx);
+    });
+  }
+
+  ////////////////to bring up text fields for adding new transactions////////////////////////////////
+  void start(BuildContext ctx) {
+    showModalBottomSheet(
+      context: ctx,
+      builder: (bctx) {
+        ///bctx is dummy not using that
+        return NewTransaction(addNew);
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,8 +71,7 @@ class MyHomePage extends StatelessWidget {
           'Expense Tracker',
           style: TextStyle(
             fontSize: 23,
-            fontWeight:FontWeight.bold,
-
+            fontWeight: FontWeight.bold,
           ),
         ),
         backgroundColor: Colors.purple[200],
@@ -32,7 +79,9 @@ class MyHomePage extends StatelessWidget {
           //it takes a list of widgets
           IconButton(
             icon: Icon(Icons.add_box),
-            onPressed: () {},
+            onPressed: () {
+              start(context);
+            },
           ),
         ],
       ),
@@ -56,14 +105,16 @@ class MyHomePage extends StatelessWidget {
                 margin: EdgeInsets.all(10),
               ),
             ),
-            ////////////////////////transation input field + transaction details //////////////////////////////
-            UserTransaction(),
+            //////////////////////// transaction details //////////////////////////////
+            TransactionList(transactions),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
-        onPressed: () {},
+        onPressed: () {
+          start(context);
+        },
         backgroundColor: Colors.purple[200],
       ),
     );

@@ -2,7 +2,7 @@
 
 import 'package:flutter/material.dart';
 
-/////// the transaction text fields container and the flat button for adding new transactions///////////////
+///////it contains  the transaction text fields container and the flat button for adding new transactions///////////////
 class NewTransaction extends StatelessWidget {
   final title = TextEditingController();
   final amount = TextEditingController();
