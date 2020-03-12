@@ -11,7 +11,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter App',
+      title: 'My expenses',
+      theme: ThemeData(
+        primarySwatch: Colors.purple,
+        accentColor: Colors.amber,
+        fontFamily: 'Quicksand',    
+        textTheme:ThemeData.light().textTheme.copyWith(   ///////my own theme
+                title: TextStyle(
+                  fontFamily: 'Quicksand',   // eh apply houga for the rest of the app
+                  fontSize: 18,      /////ethe mene theme nu define kita transaction list ch appply kita
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        appBarTheme: AppBarTheme(    ////to apply text theme for every app bar on every page
+          textTheme: ThemeData.light().textTheme.copyWith(
+                title: TextStyle(
+                  fontFamily: 'OpenSans',
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+        ),
+      ),
       home: MyHomePage(),
     );
   }
@@ -24,19 +45,19 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   /////////initial list of transactions//////////////////
-  final List<Transaction> transactions = [
-    Transaction(
-      id: 't1',
-      title: 'New shoes',
-      amount: 50,
-      date: DateTime.now(),
-    ),
-    Transaction(
-      id: 't2',
-      title: 'Groceries',
-      amount: 40,
-      date: DateTime.now(),
-    ),
+  final List<Transaction> transactions = [       /// baad de vich transactions deleate krtia si
+    //Transaction( 
+      //id: 't1',
+     // title: 'New shoes',
+   //   amount: 50,
+     // date: DateTime.now(),
+    //),
+   // Transaction(
+     // id: 't2',
+      //title: 'Groceries',
+     // amount: 40,
+      //date: DateTime.now(),
+    //),
   ];
   ////////////function for button of addNewTransaction///////////////////
   void addNew(String title, double amount) {

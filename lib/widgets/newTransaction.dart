@@ -23,7 +23,7 @@ class _NewTransactionState extends State<NewTransaction> {
     //addNew function is in userTransaction.
     // amount should be always double
     /// to convert string to double do double.parse('string')
-  Navigator.of(context).pop();//used to close the topmost section of thr screen
+  Navigator.of(context).pop();//used to close the topmost section of the screen
   }
 
   @override
@@ -61,7 +61,7 @@ class _NewTransactionState extends State<NewTransaction> {
                 onPressed: () {
                   submit();
                 },
-                textColor: Colors.purple[200],
+                textColor: Theme.of(context).primaryColor,
               )
             ],
           ),
